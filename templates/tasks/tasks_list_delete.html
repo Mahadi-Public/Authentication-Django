@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Task Form delete {% endblock title %}  
+
+{% block body %}
+    {% block images %}
+        <img src="{% static 'image/tasks-forms-delete.jpg' %}" class="img-fluid" alt="Sample image">
+    {% endblock images %}
+    {% block content %}
+        <div>
+            <h3 class="text-center">
+                {% block formsheader %}
+                    <div class="text-center">
+                        Task Delete 
+                    <div>
+                {% endblock formsheader %}
+            </h3>
+            <form action="{% url 'tasks_list_delete' queryset.id  %}"  method="post">
+                {% csrf_token %}
+                <div class="my-5 text-center">
+                    <p> Are you want to delete this  <b> {{ queryset.title }}</b> ? </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="button btn btn-danger" type="submit">Delete</button>
+                    <a href="{% url 'tasks_list' %}" class="button btn btn-primary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    {% endblock content %}
+{% endblock body %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Home {% endblock title %}  
+
+
+
+{% block images %}
+    <img src="{% static 'image/home.jpg' %}"
+class="img-fluid" alt="Sample image">
+{% endblock images %}
+{% block content %}
+    <div class="d-flex justify-content-between">
+        <p class="text-start small fw-bold  pt-1 mb-0"> Welcome Back - <span class="text-primary fw-bold">{{user.username}}</span></p>
+        <p><a class="small fw-bold  pt-1 mb-0 text-decoration-none text-danger" href="{% url "change_password" %}">Reset Password</a></p>
+    </div>
+    <p class="small py-3"> 
+        Welcome to our website! We're thrilled to have you here. Explore our offerings and discover a world of possibilities tailored just for you. Whether you're seeking information, inspiration, or assistance, we're here to make your online experience exceptional. Feel free to navigate through our pages and let us know how we can enhance your journey.
+    </p> 
+    <p>
+        <a class="small fw-bold  pt-1 mb-0 text-decoration-none text-danger" href="{% url "tasks_list" %}">Task List Here</a>
+    </p>
+    <div class="d-flex justify-content-between">
+        {% block forms %}
+        <form  method="POST" action="{% url 'logout_page' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>   
+        {% endblock forms %}
+        <a class="small fw-bold button btn btn-primary  pt-1 mb-0 text-decoration-none " href="{% url 'create_tasks' %}" type="submit" >Add Task</a>
+    </div>
+{% endblock content %}

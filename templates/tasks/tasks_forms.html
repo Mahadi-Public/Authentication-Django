@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Task Form {% endblock title %}  
+
+{% block body %}
+    {% block images %}
+        <img src="{% static 'image/tasks-forms.jpg' %}"
+        class="img-fluid" alt="Sample image">
+    {% endblock images %}
+    {% block content %}
+        <div>
+            <h3 class="text-center">
+                {% block formsheader %}
+                    Task submit Form
+                {% endblock formsheader %}
+            </h3>
+            <form action="{% url 'create_tasks' %}" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="button btn btn-primary" type="submit">submit</button>
+                    <a href="{% url 'home_page_views' %}" class="button btn btn-danger">cancel</a>
+                </div>
+            </form>
+        </div>
+    {% endblock content %}
+{% endblock body %}

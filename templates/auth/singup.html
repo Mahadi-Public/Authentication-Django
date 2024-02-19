@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} SingUp {% endblock title %}  
+
+{% block images %}
+    <img src="{% static 'image/singup.jpg' %}"
+    class="img-fluid" alt="Sample image">
+{% endblock images %}
+
+{% block content %}
+{% block forms %}
+    <form class="p-1" method="POST" >
+        <h3 class="text-center">
+            {% block formsheader %}
+                SingUp Form
+            {% endblock formsheader %}
+        </h3>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" class="btn btn-primary "
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">SingUp</button>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="small fw-bold  pt-1 mb-0">You Have An Account
+                    <a class="text-decoration-none text-danger"  href= "{% url 'login_page' %}">SingIn</a>
+                </div>    
+            </div>
+        </div>    
+    </form>
+{% endblock forms %}
+{% endblock content %}
