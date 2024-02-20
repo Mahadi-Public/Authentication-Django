@@ -18,7 +18,7 @@ def create_tasks(request):
             task_list.user = request.user  # Assuming user is associated with the TaskList model
             task_list.save()
             messages.success(request, 'Form submitted successfully')
-            return redirect('create_tasks')
+            return redirect('tasks_list')
         else:
             messages.warning(request, 'Form data is not vaild!')
     else:
