@@ -14,4 +14,4 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(TaskList)
 class TaskListAdmin(admin.ModelAdmin):
-    list_display = ['id','title','images','price','categrory']
+    list_display = ['id','title','images','price','category']

@@ -157,6 +157,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
+#login required
+LOGIN_URL = "/"
 
 # smtp sned mail
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
@@ -164,5 +166,5 @@ EMAIL_HOST = os.getenv('EMAIL_HOST',default='smtp.gmail.com')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.getenv('EMAIL_PORT',default=587)
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', default=False)
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', default=True)
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', default='OTF Team <admin.insider@gmail.com')

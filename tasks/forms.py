@@ -33,7 +33,7 @@ class TaskListForm(forms.ModelForm):
  
     class Meta:
         model = TaskList
-        fields = ['title','images','price','categrory','description']
+        fields = ['title','images','price','category','description']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 3, 'cols': 40}),
         }

@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
+from django.contrib.auth.decorators import login_required
 
 UserModel = get_user_model()
 
@@ -55,7 +56,7 @@ def singup_page(request):
         form = SingupForm()
     return render(request, 'auth/singup.html', {'form' : form})    
 
-
+@login_required
 def activate_account(request,uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -72,13 +73,13 @@ def activate_account(request,uidb64, token):
         return redirect ('singup_page')    
 
 
-
+@login_required
 def logout_page(request):
     logout(request)
     messages.success(request, 'Your account successfully logged out!')
     return redirect('login_page')
 
-
+@login_required
 def change_password(request):
     if request.method == "POST":
         form = ChangesPasswordForm(data=request.POST, user=request.user)
