@@ -3,13 +3,16 @@ from django.http import HttpResponse
 from tasks.forms import TaskListForm
 from django.contrib import messages
 from tasks.models import TaskList
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
-
+@login_required
 def home_page(request):
     return render(request, 'tasks/index.html')
 
-
+@login_required
 def create_tasks(request):
     if request.method == 'POST':
         form = TaskListForm(request.POST, request.FILES)
@@ -25,18 +28,36 @@ def create_tasks(request):
         form = TaskListForm()
     return render(request, 'tasks/tasks_forms.html', {"form": form})
 
-
+@login_required
 def tasks_list(request):
     
-    queryset = TaskList.objects.all()
+    query = request.GET.get('search')
+    queryset = TaskList.objects.filter(user=request.user)
+    
+    if query:
+        queryset = queryset.filter(
+            Q(title__icontains=query) |
+            Q (category__icontains=query) |
+            Q (price__icontains=query)
+        )
+    
+    paginator = Paginator(queryset, 5) # show 5 list in pages
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number) 
+    
+    serial_number = (page_obj.number - 1) * page_obj.paginator.per_page + 1
+    
+    for index, item in enumerate(page_obj, start=serial_number):
+        item.serial_number = index    
+        
     context = {
-        "queryset" : queryset
+        "page_obj"  : page_obj
     }
     
     return render (request, 'tasks/tasks_froms_list.html', context)
 
 
-
+@login_required
 def tasks_list_details(request, id):
     
     queryset = TaskList.objects.get(id=id)
@@ -46,7 +67,7 @@ def tasks_list_details(request, id):
     
     return render (request, 'tasks/tasks_list_details.html', context)
 
-
+@login_required
 def tasks_list_update(request, id):
     
     queryset = get_object_or_404(TaskList, id=id)
@@ -64,7 +85,7 @@ def tasks_list_update(request, id):
         }
     return render(request, 'tasks/tasks_list_update.html', context)
 
-
+@login_required
 def tasks_list_delete(request, id):
     
     queryset = get_object_or_404(TaskList, id=id)
