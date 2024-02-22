@@ -2,7 +2,7 @@
 
 <h4> Follow these commands to run this project: </h4>
 <ul>
-  <li>git clone https://github.com/Mahadi-Public/Authentication-Django.git  or  <br/> git clone git@github.com:Mahadi-Public/Authentication-Django.git</li>
+  <li>git clone https://github.com/Mahadi-Public/Authentication-Django.git  <br/>  or  <br/> git clone git@github.com:Mahadi-Public/Authentication-Django.git </li>
   <li>create a virtual environment using these commands: <br/> <b> python -m venv env  or  python3 -m venv env </b> <br/> to activate the environment, use these commands: <br/> on Ubuntu: <b> source  env/bin/activate </b> or <br/>   on Windows:  <b> env\Scripts\activate </b>  <br/> To deactivate, use this command: <b> deactivate </b> </li>
   <li>use this command to install dependencies: <b> pip install -r requirements.txt </b> </li>
   <li>create a <b>.env</b> file in the root of the project <br/> add the contents of <b>env.example</b> to the <b>.env</b> file.</li>
